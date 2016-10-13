@@ -1,0 +1,67 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Quick BGG Rating</title>
+        <style>
+            body {
+                font-family: "LatoWeb", "Segoe UI", "Lucida Grande", Tahoma, sans-serif;
+                min-width: 160px;
+                text-align: center;
+            }
+            #name {
+                font-size: 90%;
+            }
+            #rating {
+                margin-left: auto;
+                margin-right: auto;
+                font-size: 160%;
+                color: #fff;
+                background-color: #c8c9ca;
+                font-weight: bold;
+                width: 45px;
+                height: 45px;
+                margin-top: 13px;
+                margin-bottom: 13px;
+                line-height: 45px;  
+                vertical-align: middle;
+                display: none;
+            }
+            .rating-0  { background-color: #c8c9ca !important}
+            .rating-1  { background-color: #db303b !important}
+            .rating-2  { background-color: #db303b !important}
+            .rating-3  { background-color: #df4751 !important}
+            .rating-4  { background-color: #df4751 !important}
+            .rating-5  { background-color: #5369a2 !important}
+            .rating-6  { background-color: #5369a2 !important}
+            .rating-7  { background-color: #1d8acd !important}
+            .rating-8  { background-color: #2FC482 !important}
+            .rating-9  { background-color: #249563 !important}
+            .rating-10 { background-color: #249563 !important}
+
+            #spinner {
+                display: none;
+                width: 45px;
+                height: 45px;
+                background-color: #c8c9ca;
+                margin: 20px auto;
+                animation: sk-rotateplane 1.2s infinite ease-in-out;
+            }
+
+            @keyframes sk-rotateplane {
+                0% { 
+                    transform: perspective(120px) rotateX(0deg) rotateY(0deg);
+                } 50% { 
+                    transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);
+                } 100% { 
+                    transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+                }
+            }
+        </style>
+        <script src="popup.js"></script>
+    </head>
+    <body>
+        <div id="spinner"></div>
+        <div id="name"></div>
+        <div id="rating"></div>
+  </body>
+</html>
