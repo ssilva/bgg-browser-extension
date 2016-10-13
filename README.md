@@ -1,7 +1,7 @@
 Quick BGG Rating
 ================
 
-A Chrome extension for quickly getting the rating of a board game from boardgamegeeks.com.
+A Chrome extension for quickly getting the rating of a board game from boardgamegeek.com.
 
 Installation
 ------------
