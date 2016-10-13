@@ -4,6 +4,12 @@ document.addEventListener("DOMContentLoaded", function() {
     chrome.tabs.executeScript({
         code: "window.getSelection().toString();"
     }, function(selection) {
+        if (chrome.runtime.lastError) {
+            // This error will be thrown if the user clicks on the extension
+            // button while on the 'New Tab' page.
+            displayError("Go to a webpage!");
+            return;
+        }
         if (selection[0].length > 0 && selection[0].length < 100) {
             displaySpinner();
             searchByName(selection[0]);
