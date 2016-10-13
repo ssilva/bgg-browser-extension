@@ -3,7 +3,7 @@
 
     "name": "Quick BGG Rating",
     "version": "1.0",
-    "description": "Quickly get the rating of a board game from boardgamegeek.com.",
+    "description": "Quickly get the rating of a board game from BoardGameGeek.com.",
     "homepage_url": "https://github.com/ssilva/bgg-chrome-extension",
     "author": "Saulo Silva",
 
