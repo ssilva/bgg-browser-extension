@@ -23,7 +23,8 @@ function searchByName(name) {
                 getRating(items.children[0].id);
             } else {
                 console.info("searchByName(): '%s' not found.", name);
-                displayError("Game \"" + name + "\" not found.");
+                hideSpinner();
+                displayError("Game \"" + name + "\" was not found.");
             }
         }
     });
@@ -37,15 +38,14 @@ function getRating(id) {
             var rating = this.responseXML.getElementsByTagName("average")[0].attributes.value.nodeValue;
             var yearPublished = this.responseXML.getElementsByTagName("yearpublished")[0].attributes.value.nodeValue;
             var type = this.responseXML.getElementsByTagName("item")[0].attributes.type.nodeValue; 
-            console.info("getRating(): %s (%s): %s", name, yearPublished, + rating);
+            console.info("getRating(): %s (%s): %s", name, yearPublished, rating);
+            hideSpinner();
             displayResults(id, name, rating, yearPublished, type);
         }
     });
 }
 
 function displayResults(id, name, rating, yearPublished, type) {
-    document.getElementById("spinner").style.display = "none";
-
     var nameDiv = document.getElementById("name");
     nameDiv.textContent = "";
 
@@ -74,6 +74,10 @@ function displayResults(id, name, rating, yearPublished, type) {
 
 function displaySpinner() {
     document.getElementById("spinner").style.display = "block";
+}
+
+function hideSpinner() {
+    document.getElementById("spinner").style.display = "none";
 }
 
 function displayError(msg) {
