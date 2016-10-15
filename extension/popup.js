@@ -10,9 +10,10 @@ document.addEventListener("DOMContentLoaded", function() {
             displayError("Go to a webpage!");
             return;
         }
-        if (selection[0].length > 0 && selection[0].length < 100) {
+        var selectedText = selection[0].trim();
+        if (selectedText.length > 0 && selectedText.length < 100) {
             displaySpinner();
-            searchByName(selection[0]);
+            searchByName(selection[0].trim());
         } else {
             displayError("Select the name of a game!");
         }
