@@ -20,13 +20,14 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 function searchByName(name) {
-    var url = BASE_URL + "/search?type=boardgame,boardgameaccessory,boardgameexpansion&exact=1" +
+    var url = BASE_URL + "/search?type=boardgame,boardgameaccessory,boardgameexpansion" +
         "&query=" + name;
     httpGet(url, function() {
         if (this.readyState == 4) {
             var items = this.responseXML.getElementsByTagName("items")[0];
             if (items.attributes.total.value > 0) {
-                getRating(items.children[0].id);
+                var id = pickBestMatch(items);
+                getRating(id);
             } else {
                 console.info("searchByName(): '%s' not found.", name);
                 hideSpinner();
@@ -34,6 +35,21 @@ function searchByName(name) {
             }
         }
     });
+}
+
+function pickBestMatch(items) {
+    if (items.children.length < 2)
+        return items.children[0].id;
+    
+    // If there are more than one item we need to decide which one is the best match.
+    // We are assuming that items that have been around for longer are more popular,
+    // thus have a higher chance of being what the user is looking for.
+    var lowestId = items.children[0].id;
+    for (var i = 1; i < items.children.length; i++) {
+        if (items.children[i].id < lowestId)
+            lowestId = items.children[i].id;
+    }
+    return lowestId;
 }
 
 function getRating(id) {
