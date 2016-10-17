@@ -42,16 +42,25 @@ function getRating(id) {
         if (this.readyState == 4) {
             var name = this.responseXML.getElementsByTagName("name")[0].attributes.value.nodeValue;
             var rating = this.responseXML.getElementsByTagName("average")[0].attributes.value.nodeValue;
+            var ranks = this.responseXML.getElementsByTagName("rank");
             var yearPublished = this.responseXML.getElementsByTagName("yearpublished")[0].attributes.value.nodeValue;
-            var type = this.responseXML.getElementsByTagName("item")[0].attributes.type.nodeValue; 
-            console.info("getRating(): %s (%s): %s", name, yearPublished, rating);
+            var type = this.responseXML.getElementsByTagName("item")[0].attributes.type.nodeValue;
+
+            var rank = 'Not found';
+            for (var i = 0; i < ranks.length; i += 1) {
+                if (ranks[i].attributes.name.nodeValue === "boardgame") {
+                    rank = ranks[i].attributes.value.nodeValue;
+                }
+            }
+
+            console.info("getRating(): %s (%s): %s - %s", name, yearPublished, rating, rank);
             hideSpinner();
-            displayResults(id, name, rating, yearPublished, type);
+            displayResults(id, name, rating, yearPublished, type, rank);
         }
     });
 }
 
-function displayResults(id, name, rating, yearPublished, type) {
+function displayResults(id, name, rating, yearPublished, type, rank) {
     var nameDiv = document.getElementById("name");
     nameDiv.textContent = "";
 
@@ -69,6 +78,10 @@ function displayResults(id, name, rating, yearPublished, type) {
     ratingDiv.textContent = ratingNum.toFixed(1);
     ratingDiv.classList.add("rating-" + ratingNum.toFixed(0));
     ratingDiv.style.display = "block";
+
+    var rankDiv = document.getElementById("rank");
+    rankDiv.textContent = "Ranking: " + rank;
+    rankDiv.style.display = "block";
 
     // This is to allow the hyperlink to work
     window.addEventListener('click', function(e) {
