@@ -7,33 +7,34 @@ document.addEventListener("DOMContentLoaded", function() {
         if (chrome.runtime.lastError) {
             // This error will be thrown if the user clicks on the extension
             // button while on the 'New Tab' page.
-            displayError("Go to a webpage!");
+            displayStatus("Go to a webpage!");
             return;
         }
         var selectedText = selection[0].trim();
         if (selectedText.length > 0 && selectedText.length < 100) {
             displaySpinner();
-            searchByName(selectedText);
+            searchForItem(selectedText);
         } else {
-            displayError("Select the name of a game!");
+            displayStatus("Select the name of a game!");
         }
     });
 });
 
-function searchByName(name) {
+function searchForItem(name) {
     var url = BASE_URL + "/search?type=boardgame,boardgameaccessory,boardgameexpansion" +
         "&query=" + name;
     httpGet(url, function() {
-        if (this.readyState == 4) {
-            var items = this.responseXML.getElementsByTagName("items")[0];
-            if (items.attributes.total.value > 0) {
-                var id = pickBestMatch(items);
-                getRating(id);
-            } else {
-                console.info("searchByName(): '%s' not found.", name);
-                hideSpinner();
-                displayError("Game \"" + name + "\" was not found.");
-            }
+        if (this.readyState !== XMLHttpRequest.DONE)
+            return;
+
+        var items = this.responseXML.getElementsByTagName("items")[0];
+        if (items.attributes.total.value > 0) {
+            var id = pickBestMatch(items);
+            retrieveItem(id);
+        } else {
+            console.info("searchForItem(): '%s' not found.", name);
+            hideSpinner();
+            displayStatus("Game \"" + name + "\" was not found.");
         }
     });
 }
@@ -53,31 +54,32 @@ function pickBestMatch(items) {
     return lowestId;
 }
 
-function getRating(id) {
+function retrieveItem(id) {
     var url = BASE_URL + "/thing?stats=1&id=" + id;
     httpGet(url, function() {
-        if (this.readyState == 4) {
-            var name = this.responseXML.getElementsByTagName("name")[0].attributes.value.nodeValue;
-            var rating = this.responseXML.getElementsByTagName("average")[0].attributes.value.nodeValue;
-            var ranks = this.responseXML.getElementsByTagName("rank");
-            var yearPublished = this.responseXML.getElementsByTagName("yearpublished")[0].attributes.value.nodeValue;
-            var type = this.responseXML.getElementsByTagName("item")[0].attributes.type.nodeValue;
+        if (this.readyState !== XMLHttpRequest.DONE)
+            return;
 
-            var rank = 'Not found';
-            for (var i = 0; i < ranks.length; i += 1) {
-                if (ranks[i].attributes.name.nodeValue === "boardgame") {
-                    rank = ranks[i].attributes.value.nodeValue;
-                }
+        var name = this.responseXML.getElementsByTagName("name")[0].attributes.value.nodeValue;
+        var rating = this.responseXML.getElementsByTagName("average")[0].attributes.value.nodeValue;
+        var ranks = this.responseXML.getElementsByTagName("rank");
+        var yearPublished = this.responseXML.getElementsByTagName("yearpublished")[0].attributes.value.nodeValue;
+        var type = this.responseXML.getElementsByTagName("item")[0].attributes.type.nodeValue;
+
+        var rank = 'Not found';
+        for (var i = 0; i < ranks.length; i += 1) {
+            if (ranks[i].attributes.name.nodeValue === "boardgame") {
+                rank = ranks[i].attributes.value.nodeValue;
             }
-
-            console.info("getRating(): %s (%s): %s - %s", name, yearPublished, rating, rank);
-            hideSpinner();
-            displayResults(id, name, rating, yearPublished, type, rank);
         }
+
+        console.info("retrieveItem(): %s (%s): %s - %s", name, yearPublished, rating, rank);
+        hideSpinner();
+        displayItem(id, name, rating, yearPublished, type, rank);
     });
 }
 
-function displayResults(id, name, rating, yearPublished, type, rank) {
+function displayItem(id, name, rating, yearPublished, type, rank) {
     var nameDiv = document.getElementById("name");
     nameDiv.textContent = "";
 
@@ -116,8 +118,8 @@ function hideSpinner() {
     document.getElementById("spinner").style.display = "none";
 }
 
-function displayError(msg) {
-    document.getElementById("name").textContent = msg;
+function displayStatus(msg) {
+    document.getElementById("status").textContent = msg;
 }
 
 function httpGet(url, onReady) {
