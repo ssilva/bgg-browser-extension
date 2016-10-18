@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Quick BGG Rating Options</title>
+        <style>
+            body { padding: 10px; }
+            label { display: block; }
+            fieldset, #status { margin-bottom: 10px; }
+        </style>
+    </head>
+
+    <body>
+        <fieldset>
+            <legend>Search only for:</legend>
+            <label>
+                <input type="checkbox" id="board-game">
+                Board games
+            </label>
+            <label>
+                <input type="checkbox" id="board-game-expansion">
+                Board game expansions
+            </label>
+            <label>
+                <input type="checkbox" id="board-game-accessory">
+                Board game accessories
+            </label>
+        </fieldset>
+
+        <fieldset>
+            <label>
+                <input type="checkbox" id="exact-search">
+                Only display exact matches
+            </label>
+        </fieldset>
+
+        <div id="status"></div>
+        <button id="save">Save</button>
+
+        <script src="common.js"></script>
+        <script src="options.js"></script>
+    </body>
+</html>

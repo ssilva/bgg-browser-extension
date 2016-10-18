@@ -1,4 +1,13 @@
+/*
+ * Functions for popup.html.
+ * Dependencies: common.js
+ */
+
 const BASE_URL = "https://boardgamegeek.com/xmlapi2";
+
+var OPTIONS = {};
+loadOptions(function(opts) { OPTIONS = opts; });
+console.log("OPTIONS=" + OPTIONS);
 
 document.addEventListener("DOMContentLoaded", function() {
     chrome.tabs.executeScript({
@@ -21,8 +30,7 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 function searchForItem(name) {
-    var url = BASE_URL + "/search?type=boardgame,boardgameaccessory,boardgameexpansion" +
-        "&query=" + name;
+    var url = buildSearchUrl(name);
     httpGet(url, function() {
         if (this.readyState !== XMLHttpRequest.DONE)
             return;
@@ -118,8 +126,27 @@ function hideSpinner() {
     document.getElementById("spinner").style.display = "none";
 }
 
-function displayStatus(msg) {
-    document.getElementById("status").textContent = msg;
+function buildSearchUrl(name) {
+    var searchUrl = BASE_URL + "/search?";
+    var params = [];
+
+    var typeValues = [];
+    if (OPTIONS.boardGame)
+        typeValues.push("boardgame");
+    if (OPTIONS.boardGameAccessory)
+        typeValues.push("boardgameaccessory");
+    if (OPTIONS.boardGameExpansion)
+        typeValues.push("boardgameexpansion");
+    if (typeValues.length > 0)
+        params.push("type=" + typeValues.join(","));
+
+    if (OPTIONS.exactSearch)
+        params.push("exact=1");
+
+    params.push("query=" + name);
+
+    searchUrl += params.join("&");
+    return searchUrl;
 }
 
 function httpGet(url, onReady) {
