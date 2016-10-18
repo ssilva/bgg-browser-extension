@@ -8,7 +8,7 @@
                 min-width: 160px;
                 text-align: center;
             }
-            #name {
+            #name, #rank {
                 font-size: 90%;
             }
             #rating {
@@ -22,7 +22,7 @@
                 height: 45px;
                 margin-top: 13px;
                 margin-bottom: 13px;
-                line-height: 45px;  
+                line-height: 45px;
                 vertical-align: middle;
                 display: none;
             }
@@ -48,11 +48,11 @@
             }
 
             @keyframes sk-rotateplane {
-                0% { 
+                0% {
                     transform: perspective(120px) rotateX(0deg) rotateY(0deg);
-                } 50% { 
+                } 50% {
                     transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);
-                } 100% { 
+                } 100% {
                     transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
                 }
             }
@@ -63,5 +63,6 @@
         <div id="spinner"></div>
         <div id="name"></div>
         <div id="rating"></div>
+        <div id="rank"></div>
   </body>
 </html>
