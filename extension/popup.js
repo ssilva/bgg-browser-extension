@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function() {
         var selectedText = selection[0].trim();
         if (selectedText.length > 0 && selectedText.length < 100) {
             displaySpinner();
-            searchByName(selection[0].trim());
+            searchByName(selectedText);
         } else {
             displayError("Select the name of a game!");
         }
