@@ -78,6 +78,7 @@ function retrieveItem(id) {
         for (var i = 0; i < ranks.length; i += 1) {
             if (ranks[i].attributes.name.nodeValue === "boardgame") {
                 rank = ranks[i].attributes.value.nodeValue;
+                break;
             }
         }
 
