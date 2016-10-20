@@ -3,31 +3,31 @@
  * Dependencies: common.js
  */
 
-const BASE_URL = "https://boardgamegeek.com/xmlapi2";
+const API_BASE_URL = "https://boardgamegeek.com/xmlapi2";
 
 var OPTIONS = {};
 loadOptions(function(opts) { OPTIONS = opts; });
 console.log("OPTIONS=" + OPTIONS);
 
 document.addEventListener("DOMContentLoaded", function() {
-    chrome.tabs.executeScript({
-        code: "window.getSelection().toString();"
-    }, function(selection) {
-        if (chrome.runtime.lastError) {
-            // This error will be thrown if the user clicks on the extension
-            // button while on the 'New Tab' page.
-            displayStatus("Go to a webpage!");
-            return;
-        }
-        var selectedText = selection[0].trim();
-        if (selectedText.length > 0 && selectedText.length < 100) {
-            displaySpinner();
-            searchForItem(selectedText);
-        } else {
-            displayStatus("Select the name of a game!");
-        }
-    });
+    chrome.tabs.executeScript({ code: "window.getSelection().toString();" }, handleSelection);
 });
+
+function handleSelection(selection) {
+    // This error will be thrown if the user activates the extension while not on a web page.
+    if (chrome.runtime.lastError) {
+        displayStatus("Go to a webpage!");
+        return;
+    }
+
+    var selectedText = selection[0].trim();
+    if (selectedText.length > 0 && selectedText.length < 100) {
+        displaySpinner();
+        searchForItem(selectedText);
+    } else {
+        displayStatus("Select the name of a game!");
+    }
+}
 
 function searchForItem(name) {
     var url = buildSearchUrl(name);
@@ -63,7 +63,7 @@ function pickBestMatch(items) {
 }
 
 function retrieveItem(id) {
-    var url = BASE_URL + "/thing?stats=1&id=" + id;
+    var url = API_BASE_URL + "/thing?stats=1&id=" + id;
     httpGet(url, function() {
         if (this.readyState !== XMLHttpRequest.DONE)
             return;
@@ -74,7 +74,7 @@ function retrieveItem(id) {
         var yearPublished = this.responseXML.getElementsByTagName("yearpublished")[0].attributes.value.nodeValue;
         var type = this.responseXML.getElementsByTagName("item")[0].attributes.type.nodeValue;
 
-        var rank = 'Not found';
+        var rank = "Not found";
         for (var i = 0; i < ranks.length; i += 1) {
             if (ranks[i].attributes.name.nodeValue === "boardgame") {
                 rank = ranks[i].attributes.value.nodeValue;
@@ -127,7 +127,6 @@ function hideSpinner() {
 }
 
 function buildSearchUrl(name) {
-    var searchUrl = BASE_URL + "/search?";
     var params = [];
 
     var typeValues = [];
@@ -145,8 +144,7 @@ function buildSearchUrl(name) {
 
     params.push("query=" + name);
 
-    searchUrl += params.join("&");
-    return searchUrl;
+    return API_BASE_URL + "/search?" + params.join("&");
 }
 
 function httpGet(url, onReady) {
