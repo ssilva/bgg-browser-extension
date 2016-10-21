@@ -1,6 +1,11 @@
 Changelog
 =========
 
+v1.3.0 (2016-10-20)
+--------------------
+* Add options page.
+* Display global ranking.
+
 v1.2 (2016-10-17)
 -----------------
 * Make the search less restrictive/specific.
