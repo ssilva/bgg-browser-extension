@@ -24,4 +24,5 @@ Features
 Screenshots
 -----------
 
-![Quick BGG Rating](https://raw.githubusercontent.com/ssilva/bgg-chrome-extension/master/dist/screenshot.png "Quick BGG Rating")
+![Quick BGG Rating](https://raw.githubusercontent.com/ssilva/bgg-chrome-extension/master/dist/screenshot-01.png "Quick BGG Rating")
+![Quick BGG Rating - Options](https://raw.githubusercontent.com/ssilva/bgg-chrome-extension/master/dist/screenshot-02.png "Quick BGG Rating - Options")
