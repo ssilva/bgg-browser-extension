@@ -6,17 +6,21 @@
 const API_BASE_URL = "https://boardgamegeek.com/xmlapi2";
 
 var OPTIONS = {};
-loadOptions(function(opts) { OPTIONS = opts; });
-console.log("OPTIONS=" + OPTIONS);
+loadOptions(function(opts) {
+    OPTIONS = opts;
+    console.log("OPTIONS=" + JSON.stringify(OPTIONS));
+});
 
 document.addEventListener("DOMContentLoaded", function() {
     chrome.tabs.executeScript({ code: "window.getSelection().toString();" }, handleSelection);
+    document.getElementById("search").addEventListener("keyup", handleSearchKeyUp);
 });
 
 function handleSelection(selection) {
     // This error will be thrown if the user activates the extension while not on a web page.
     if (chrome.runtime.lastError) {
-        displayStatus("Go to a webpage!");
+        displayStatus("or go to a webpage");
+        displaySearch();
         return;
     }
 
@@ -25,7 +29,23 @@ function handleSelection(selection) {
         displaySpinner();
         searchForItem(selectedText);
     } else {
-        displayStatus("Select the name of a game!");
+        displayStatus("or select the name of a game");
+        displaySearch();
+    }
+}
+
+function handleSearchKeyUp(event) {
+    event.preventDefault();
+
+    if (event.code === "Enter") {
+        var query = document.getElementById("search").value;
+        query = query.trim();
+        if (query.length > 0) {
+            displaySpinner();
+            searchForItem(query.trim());
+        } else {
+            displayStatus("or enter the name of a game");
+        }
     }
 }
 
@@ -42,7 +62,8 @@ function searchForItem(name) {
         } else {
             console.info("searchForItem(): '%s' not found.", name);
             hideSpinner();
-            displayStatus("Game \"" + name + "\" was not found.");
+            displayStatus("\"" + name + "\" was not found.");
+            displaySearch(name);
         }
     });
 }
@@ -84,6 +105,8 @@ function retrieveItem(id) {
 
         console.info("retrieveItem(): %s (%s): %s - %s", name, yearPublished, rating, rank);
         hideSpinner();
+        displayStatus("");
+        hideSearch();
         displayItem(id, name, rating, yearPublished, type, rank);
     });
 }
@@ -146,6 +169,19 @@ function buildSearchUrl(name) {
     params.push("query=" + name);
 
     return API_BASE_URL + "/search?" + params.join("&");
+}
+
+function displaySearch(query) {
+    var searchInput = document.getElementById("search");
+    searchInput.style.display = "block";
+    searchInput.focus = true;
+
+    if (query)
+        searchInput.value = query;
+}
+
+function hideSearch() {
+    document.getElementById("search").style.display = "none";
 }
 
 function httpGet(url, onReady) {

@@ -11,6 +11,10 @@
             #name, #rank {
                 font-size: 90%;
             }
+            #search {
+                display: none;
+                margin: 10px auto;
+            }
             #rating {
                 margin-left: auto;
                 margin-right: auto;
@@ -37,7 +41,6 @@
             .rating-8  { background-color: #2FC482 !important}
             .rating-9  { background-color: #249563 !important}
             .rating-10 { background-color: #249563 !important}
-
             #spinner {
                 display: none;
                 width: 45px;
@@ -46,7 +49,6 @@
                 margin: 20px auto;
                 animation: sk-rotateplane 1.2s infinite ease-in-out;
             }
-
             @keyframes sk-rotateplane {
                 0% {
                     transform: perspective(120px) rotateX(0deg) rotateY(0deg);
@@ -66,7 +68,8 @@
             <div id="name"></div>
             <div id="rating"></div>
             <div id="rank"></div>
-            <div id="status"></div>
         </div>
+        <input type="search" id="search" placeholder="Search here" maxlength="100">
+        <div id="status"></div>
   </body>
 </html>
