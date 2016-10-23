@@ -25,7 +25,7 @@ function handleSelection(selection) {
     }
 
     var selectedText = selection[0].trim();
-    if (selectedText.length > 0 && selectedText.length < 100) {
+    if (selectedText.length > 1 && selectedText.length < 100) {
         displaySpinner();
         searchForItem(selectedText);
     } else {
@@ -40,7 +40,7 @@ function handleSearchKeyUp(event) {
     if (event.code === "Enter") {
         var query = document.getElementById("search").value;
         query = query.trim();
-        if (query.length > 0) {
+        if (query.length > 1) {
             displaySpinner();
             searchForItem(query.trim());
         } else {
