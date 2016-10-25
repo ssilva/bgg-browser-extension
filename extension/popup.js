@@ -73,13 +73,11 @@ function pickBestMatch(items) {
     if (items.children.length < 2)
         return [items.children[0].id];
 
-    // If there are more than one item we need to decide which one is the best match.
-    // We are assuming that items that have been around for longer are more popular,
-    // thus have a higher chance of being what the user is looking for.
+    // If there is more than one item, pick the best match. Assume that older items are more
+    // known, and thus have a higher chance of being what the user is looking for.
     var ids = [];
-    for (var i = 0; i < items.children.length; i++) {
-        ids.push(items.children[i].id);
-    }
+    for (let child of items.children)
+        ids.push(child.id);
 
     ids.sort();
     return ids.slice(0, OPTIONS.numOfItemsToDisplay);
@@ -98,9 +96,9 @@ function retrieveItem(id) {
         var type = this.responseXML.getElementsByTagName("item")[0].attributes.type.nodeValue;
 
         var rank = "Not found";
-        for (var i = 0; i < ranks.length; i += 1) {
-            if (ranks[i].attributes.name.nodeValue === "boardgame") {
-                rank = ranks[i].attributes.value.nodeValue;
+        for (let r of ranks) {
+            if (r.attributes.name.nodeValue === "boardgame") {
+                rank = r.attributes.value.nodeValue;
                 break;
             }
         }
