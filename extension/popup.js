@@ -57,8 +57,9 @@ function searchForItem(name) {
 
         var items = this.responseXML.getElementsByTagName("items")[0];
         if (items.attributes.total.value > 0) {
-            var id = pickBestMatch(items);
-            retrieveItem(id);
+            var ids = pickBestMatch(items);
+            for (let id of ids)
+                retrieveItem(id);
         } else {
             console.info("searchForItem(): '%s' not found.", name);
             hideSpinner();
@@ -70,17 +71,18 @@ function searchForItem(name) {
 
 function pickBestMatch(items) {
     if (items.children.length < 2)
-        return items.children[0].id;
-    
+        return [items.children[0].id];
+
     // If there are more than one item we need to decide which one is the best match.
     // We are assuming that items that have been around for longer are more popular,
     // thus have a higher chance of being what the user is looking for.
-    var lowestId = items.children[0].id;
-    for (var i = 1; i < items.children.length; i++) {
-        if (items.children[i].id < lowestId)
-            lowestId = items.children[i].id;
+    var ids = [];
+    for (var i = 0; i < items.children.length; i++) {
+        ids.push(items.children[i].id);
     }
-    return lowestId;
+
+    ids.sort();
+    return ids.slice(0, OPTIONS.numOfItemsToDisplay);
 }
 
 function retrieveItem(id) {
@@ -107,13 +109,33 @@ function retrieveItem(id) {
         hideSpinner();
         displayStatus("");
         hideSearch();
-        displayItem(id, name, rating, yearPublished, type, rank);
+        displayItem(0, id, name, rating, yearPublished, type, rank);
     });
 }
 
-function displayItem(id, name, rating, yearPublished, type, rank) {
-    var nameDiv = document.getElementById("name");
-    nameDiv.textContent = "";
+function displayItem(index, id, name, rating, yearPublished, type, rank) {
+    var itemDiv = document.createElement("div");
+    itemDiv.id = "item-" + index;
+    itemDiv.classList.add("item");
+
+    itemDiv.appendChild(createNameDiv(index, id, name, yearPublished, type));
+    itemDiv.appendChild(createRatingDiv(index, rating));
+    itemDiv.appendChild(createRankDiv(index, rank));
+
+    document.getElementById("items").appendChild(itemDiv);
+
+    // This is to allow the hyperlink to work
+    window.addEventListener('click', function(e) {
+        if(e.target.href !== undefined) {
+            chrome.tabs.create({ url: e.target.href });
+        }
+    });
+}
+
+function createNameDiv(index, id, name, yearPublished, type) {
+    var nameDiv = document.createElement("div");
+    nameDiv.id = "name-" + index;
+    nameDiv.classList.add("name");
 
     var aTag = document.createElement("a");
     var url = "https://boardgamegeek.com/" + type + "/" + id;
@@ -123,23 +145,27 @@ function displayItem(id, name, rating, yearPublished, type, rank) {
     nameDiv.appendChild(aTag);
     var yearPublishedTxt = document.createTextNode(" (" + yearPublished + ")");
     nameDiv.appendChild(yearPublishedTxt);
+    return nameDiv;
+}
 
-    var ratingDiv = document.getElementById("rating");
+function createRatingDiv(index, rating) {
+    var ratingDiv = document.createElement("div");
+    ratingDiv.id = "rating-" + index;
+
     var ratingNum = new Number(rating);
     ratingDiv.textContent = ratingNum.toFixed(1);
-    ratingDiv.classList.add("rating-" + ratingNum.toFixed(0));
+    ratingDiv.classList.add("rating", "rating-" + ratingNum.toFixed(0));
     ratingDiv.style.display = "block";
+    return ratingDiv;
+}
 
-    var rankDiv = document.getElementById("rank");
+function createRankDiv(index, rank) {
+    var rankDiv = document.createElement("div");
+    rankDiv.id = "rank-" + index;
+    rankDiv.classList.add("rank");
     rankDiv.textContent = "Ranking: " + rank;
     rankDiv.style.display = "block";
-
-    // This is to allow the hyperlink to work
-    window.addEventListener('click', function(e) {
-        if(e.target.href !== undefined) {
-            chrome.tabs.create({ url: e.target.href });
-        }
-    });
+    return rankDiv;
 }
 
 function displaySpinner() {

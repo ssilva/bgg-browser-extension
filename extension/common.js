@@ -7,6 +7,7 @@ function loadOptions(callback) {
         boardGame: true,
         boardGameExpansion: true,
         boardGameAccessory: false,
+        numOfItemsToDisplay: 1,
         exactSearch: false
     }, function(items) {
         callback(items);

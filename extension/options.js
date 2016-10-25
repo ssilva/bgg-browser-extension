@@ -7,6 +7,7 @@ function saveOptions() {
     var boardGame = document.getElementById("board-game").checked;
     var boardGameExpansion = document.getElementById("board-game-expansion").checked;
     var boardGameAccessory = document.getElementById("board-game-accessory").checked;
+    var numOfItemsToDisplay = document.getElementById("num-of-items-to-display").value;
     var exactSearch = document.getElementById("exact-search").checked;
 
     if (!boardGame && !boardGameExpansion && !boardGameAccessory) {
@@ -19,6 +20,7 @@ function saveOptions() {
         boardGame: boardGame,
         boardGameExpansion: boardGameExpansion,
         boardGameAccessory: boardGameAccessory,
+        numOfItemsToDisplay: numOfItemsToDisplay,
         exactSearch: exactSearch
     }, function() {
         displayStatus("Options saved.", 2400);
@@ -30,6 +32,7 @@ function restoreOptions() {
         document.getElementById("board-game").checked = items.boardGame;
         document.getElementById("board-game-expansion").checked = items.boardGameExpansion;
         document.getElementById("board-game-accessory").checked = items.boardGameAccessory;
+        document.getElementById("num-of-items-to-display").value = items.numOfItemsToDisplay;
         document.getElementById("exact-search").checked = items.exactSearch;
     });
 }

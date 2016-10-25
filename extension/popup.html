@@ -8,14 +8,24 @@
                 min-width: 160px;
                 text-align: center;
             }
-            #name, #rank {
+            #items div:last-child {
+                border-bottom: none;
+                margin-bottom: 0px;
+                padding-bottom: 0px;
+            }
+            .item {
+                margin-bottom: 10px;
+                padding-bottom: 10px;
+                border-bottom: 1px solid #eee;
+            }
+            .name, .rank {
                 font-size: 90%;
             }
             #search {
                 display: none;
                 margin: 10px auto;
             }
-            #rating {
+            .rating {
                 margin-left: auto;
                 margin-right: auto;
                 font-size: 160%;
@@ -63,12 +73,8 @@
         <script src="popup.js"></script>
     </head>
     <body>
-        <div id="item">
-            <div id="spinner"></div>
-            <div id="name"></div>
-            <div id="rating"></div>
-            <div id="rank"></div>
-        </div>
+        <div id="items"></div>
+        <div id="spinner"></div>
         <input type="search" id="search" placeholder="Search here" maxlength="100">
         <div id="status"></div>
   </body>
