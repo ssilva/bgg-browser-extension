@@ -1,8 +1,13 @@
 Changelog
 =========
 
+v1.4.0 (2016-10-25)
+-------------------
+* Show search box when: no text is selected, the user is not on a webpage or the game was not found.
+* Add ability to show more than one item.
+
 v1.3.0 (2016-10-20)
---------------------
+-------------------
 * Add options page.
 * Display global ranking.
 
