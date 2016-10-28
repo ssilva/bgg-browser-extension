@@ -121,13 +121,6 @@ function displayItem(index, id, name, rating, yearPublished, type, rank) {
     itemDiv.appendChild(createRankDiv(index, rank));
 
     document.getElementById("items").appendChild(itemDiv);
-
-    // This is to allow the hyperlink to work
-    window.addEventListener('click', function(e) {
-        if(e.target.href !== undefined) {
-            chrome.tabs.create({ url: e.target.href });
-        }
-    });
 }
 
 function createNameDiv(index, id, name, yearPublished, type) {
@@ -140,6 +133,13 @@ function createNameDiv(index, id, name, yearPublished, type) {
     aTag.setAttribute("href", url);
     aTag.setAttribute("title", url);
     aTag.innerHTML = name;
+    // This is to allow the hyperlink to work
+    aTag.addEventListener("click", function(e) {
+        if(e.target.href !== undefined) {
+            chrome.tabs.create({ url: e.target.href });
+        }
+    });
+
     nameDiv.appendChild(aTag);
     var yearPublishedTxt = document.createTextNode(" (" + yearPublished + ")");
     nameDiv.appendChild(yearPublishedTxt);
