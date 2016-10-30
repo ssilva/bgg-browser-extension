@@ -1,6 +1,10 @@
 Changelog
 =========
 
+v1.4.1 (2016-10-30)
+-------------------
+* Do not open more than one tab when the user clicks on a link.
+
 v1.4.0 (2016-10-25)
 -------------------
 * Show search box when: no text is selected, the user is not on a webpage or the game was not found.
