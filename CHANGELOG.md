@@ -1,6 +1,10 @@
 Changelog
 =========
 
+v1.4.2 (2017-05-21)
+-------------------
+* Fix a bug that kept the search box from being displayed the first time the extension is opened on a page.
+
 v1.4.1 (2016-10-30)
 -------------------
 * Do not open more than one tab when the user clicks on a link.
@@ -13,7 +17,7 @@ v1.4.0 (2016-10-25)
 v1.3.0 (2016-10-20)
 -------------------
 * Add options page.
-* Display global ranking.
+* Display global ranking (thanks to @ablanco).
 
 v1.2 (2016-10-17)
 -----------------
