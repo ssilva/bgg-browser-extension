@@ -14,6 +14,7 @@ loadOptions(function(opts) {
 document.addEventListener("DOMContentLoaded", function() {
     chrome.tabs.executeScript({ code: "window.getSelection().toString();" }, handleSelection);
     document.getElementById("search").addEventListener("keyup", handleSearchKeyUp);
+    document.getElementById("search").focus();
 });
 
 function handleSelection(selection) {

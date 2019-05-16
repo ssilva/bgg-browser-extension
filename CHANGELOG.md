@@ -1,6 +1,10 @@
 Changelog
 =========
 
+v1.4.3 (2019-05-16)
+-------------------
+* When the extension is activated, set the focus on the search box.
+
 v1.4.2 (2017-05-21)
 -------------------
 * Fix a bug that kept the search box from being displayed the first time the extension is opened on a page.
