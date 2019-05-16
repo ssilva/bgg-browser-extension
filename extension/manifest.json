@@ -23,5 +23,11 @@
         "https://boardgamegeek.com/",
         "activeTab",
         "storage"
-    ]
+    ],
+
+    "applications": {
+        "gecko": {
+            "id": "saulo@saulosilva.com"
+        }
+    }
 }

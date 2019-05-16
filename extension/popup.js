@@ -135,7 +135,7 @@ function createNameDiv(index, id, name, yearPublished, type) {
     aTag.innerHTML = name;
     // This is to allow the hyperlink to work
     aTag.addEventListener("click", function(e) {
-        if(e.target.href !== undefined) {
+        if (e.target.href !== undefined) {
             chrome.tabs.create({ url: e.target.href });
         }
     });
