@@ -2,7 +2,7 @@
     "manifest_version": 2,
 
     "name": "Quick BGG Rating",
-    "version": "1.4.3",
+    "version": "1.4.4",
     "description": "Quickly get the rating of a board game from BoardGameGeek.com.",
     "homepage_url": "https://github.com/ssilva/bgg-chrome-extension",
     "author": "Saulo Silva",
@@ -19,6 +19,15 @@
     },
 
     "browser_action": { "default_popup": "popup.html" },
+
+    "commands": {
+        "_execute_browser_action": {
+            "suggested_key": {
+                "default": "Ctrl+Shift+S"
+            }
+        }
+    },
+
     "permissions": [
         "https://boardgamegeek.com/",
         "activeTab",

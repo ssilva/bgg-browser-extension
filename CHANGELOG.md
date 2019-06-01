@@ -1,6 +1,11 @@
 Changelog
 =========
 
+v1.4.4 (2019-06-01)
+-------------------
+* Add <kbd>Crtl-Shift-S</kbd> (<kbd>Command-Shift-S</kbd> on macOS) as the
+default keyboard shortcut to activate the extension.
+
 v1.4.3 (2019-05-16)
 -------------------
 * When the extension is activated, set the focus on the search box.

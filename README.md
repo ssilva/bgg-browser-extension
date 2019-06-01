@@ -4,13 +4,14 @@ A Chrome extension for quickly getting the rating of a board game from BoardGame
 
 ## Installation
 
-1. [Install it from the Chrome Web Store](https://chrome.google.com/webstore/detail/quick-bgg-rating/nganmciekgocjldlblecnnfheffpennb).
-2. Set up a shortcut by going to `chrome://extensions/shortcuts` (optional, but highly suggested).
+[Install it from the Chrome Web Store](https://chrome.google.com/webstore/detail/quick-bgg-rating/nganmciekgocjldlblecnnfheffpennb)
 
 ## How to use
 
 1. On any webpage, select the name of a board game.
-2. Trigger the shortcut or click on this extension's icon (the grey meeple to the right of the address bar).
+2. <kbd>Ctrl-Shift-S</kbd> (or <kbd>Command-Shift-S</kbd> on macOS)
+
+The shortcut can be changed in `chrome://extensions/shortcuts`.
 
 ## Features
 
