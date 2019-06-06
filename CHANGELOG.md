@@ -1,10 +1,14 @@
 Changelog
 =========
 
+v1.5.0 (2019-06-06)
+-------------------
+* Make it compatible with Firefox.
+
 v1.4.4 (2019-06-01)
 -------------------
-* Add <kbd>Crtl-Shift-S</kbd> (<kbd>Command-Shift-S</kbd> on macOS) as the
-default keyboard shortcut to activate the extension.
+* Add <kbd>Alt-Shift-S</kbd> as the default keyboard shortcut to activate the
+extension.
 
 v1.4.3 (2019-05-16)
 -------------------

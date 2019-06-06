@@ -133,7 +133,7 @@ function createNameDiv(index, id, name, yearPublished, type) {
     var url = "https://boardgamegeek.com/" + type + "/" + id;
     aTag.setAttribute("href", url);
     aTag.setAttribute("title", url);
-    aTag.innerHTML = name;
+    aTag.appendChild(document.createTextNode(name));
     // This is to allow the hyperlink to work
     aTag.addEventListener("click", function(e) {
         if (e.target.href !== undefined) {

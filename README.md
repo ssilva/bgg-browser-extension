@@ -1,17 +1,19 @@
 # Quick BGG Rating
 
-A Chrome extension for quickly getting the rating of a board game from BoardGameGeek.com.
+A Chrome extension and Firefox addon for quickly getting the rating of a board
+game from BoardGameGeek.com.
 
 ## Installation
 
-[Install it from the Chrome Web Store](https://chrome.google.com/webstore/detail/quick-bgg-rating/nganmciekgocjldlblecnnfheffpennb)
+[Install it for Chrome][1] or [install it for Firefox][2].
 
 ## How to use
 
 1. On any webpage, select the name of a board game.
-2. <kbd>Ctrl-Shift-S</kbd> (or <kbd>Command-Shift-S</kbd> on macOS)
+2. <kbd>Alt-Shift-S</kbd>
 
-The shortcut can be changed in `chrome://extensions/shortcuts`.
+The shortcut can be changed in `chrome://extensions/shortcuts` in Chrome or in
+`about:addons` in Firefox.
 
 ## Features
 
@@ -21,5 +23,8 @@ The shortcut can be changed in `chrome://extensions/shortcuts`.
 
 ## Screenshots
 
-![Quick BGG Rating](https://raw.githubusercontent.com/ssilva/bgg-chrome-extension/master/dist/screenshot-01.png "Quick BGG Rating")
-![Quick BGG Rating - Options](https://raw.githubusercontent.com/ssilva/bgg-chrome-extension/master/dist/screenshot-02.png "Quick BGG Rating - Options")
+![Quick BGG Rating](https://raw.githubusercontent.com/ssilva/bgg-browser-extension/master/dist/screenshot-01.png "Quick BGG Rating")
+![Quick BGG Rating - Options](https://raw.githubusercontent.com/ssilva/bgg-browser-extension/master/dist/screenshot-02.png "Quick BGG Rating - Options")
+
+[1]: https://chrome.google.com/webstore/detail/quick-bgg-rating/nganmciekgocjldlblecnnfheffpennb
+[2]: https://addons.mozilla.org/…/quick-bgg-rating

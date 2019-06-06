@@ -2,14 +2,14 @@
     "manifest_version": 2,
 
     "name": "Quick BGG Rating",
-    "version": "1.4.4",
+    "version": "1.5.0",
     "description": "Quickly get the rating of a board game from BoardGameGeek.com.",
-    "homepage_url": "https://github.com/ssilva/bgg-chrome-extension",
+    "homepage_url": "https://github.com/ssilva/bgg-browser-extension",
     "author": "Saulo Silva",
 
     "icons": {
-        "16": "meeple-16.png",
-        "48": "meeple-48.png",
+        "32": "meeple-16.png",
+        "96": "meeple-48.png",
         "128": "meeple-128.png"
     },
 
@@ -23,7 +23,7 @@
     "commands": {
         "_execute_browser_action": {
             "suggested_key": {
-                "default": "Ctrl+Shift+S"
+                "default": "Alt+Shift+S"
             }
         }
     },
