@@ -1,7 +1,7 @@
 # Quick BGG Rating
 
-A Chrome extension and Firefox addon for quickly getting the rating of a board
-game from BoardGameGeek.com.
+A Chrome and Firefox extension for quickly getting the rating of a board game
+from BoardGameGeek.com.
 
 ## Installation
 
@@ -12,7 +12,7 @@ game from BoardGameGeek.com.
 1. On any webpage, select the name of a board game.
 2. <kbd>Alt-Shift-S</kbd>
 
-The shortcut can be changed in `chrome://extensions/shortcuts` in Chrome or in
+To change the shortcut, go to `chrome://extensions/shortcuts` in Chrome or to
 `about:addons` in Firefox.
 
 ## Features
@@ -27,4 +27,4 @@ The shortcut can be changed in `chrome://extensions/shortcuts` in Chrome or in
 ![Quick BGG Rating - Options](https://raw.githubusercontent.com/ssilva/bgg-browser-extension/master/dist/screenshot-02.png "Quick BGG Rating - Options")
 
 [1]: https://chrome.google.com/webstore/detail/quick-bgg-rating/nganmciekgocjldlblecnnfheffpennb
-[2]: https://addons.mozilla.org/…/quick-bgg-rating
+[2]: https://addons.mozilla.org/addon/quick-bgg-rating/
