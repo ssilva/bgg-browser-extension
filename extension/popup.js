@@ -133,13 +133,8 @@ function createNameDiv(index, id, name, yearPublished, type) {
     var url = "https://boardgamegeek.com/" + type + "/" + id;
     aTag.setAttribute("href", url);
     aTag.setAttribute("title", url);
+    aTag.setAttribute("target", "_blank");
     aTag.appendChild(document.createTextNode(name));
-    // This is to allow the hyperlink to work
-    aTag.addEventListener("click", function(e) {
-        if (e.target.href !== undefined) {
-            chrome.tabs.create({ url: e.target.href });
-        }
-    });
 
     nameDiv.appendChild(aTag);
     var yearPublishedTxt = document.createTextNode(" (" + yearPublished + ")");
