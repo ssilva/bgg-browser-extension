@@ -1,6 +1,11 @@
 Changelog
 =========
 
+v1.5.1 (2020-10-21)
+-------------------
+* Enable exact search by default
+* Fixes a bug where two identical tabs were opened when an item's name was clicked on. This affected Firefox only.
+
 v1.5.0 (2019-06-06)
 -------------------
 * Make it compatible with Firefox.
@@ -30,7 +35,7 @@ v1.4.0 (2016-10-25)
 v1.3.0 (2016-10-20)
 -------------------
 * Add options page.
-* Display global ranking (thanks to @ablanco).
+* Display global ranking (thanks to [@ablanco](https://github.com/ablanco)).
 
 v1.2 (2016-10-17)
 -----------------
