@@ -2,7 +2,7 @@
     "manifest_version": 2,
 
     "name": "Quick BGG Rating",
-    "version": "1.5.0",
+    "version": "1.5.1",
     "description": "Quickly get the rating of a board game from BoardGameGeek.com.",
     "homepage_url": "https://github.com/ssilva/bgg-browser-extension",
     "author": "Saulo Silva",
