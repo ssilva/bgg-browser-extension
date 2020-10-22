@@ -8,7 +8,7 @@ function loadOptions(callback) {
         boardGameExpansion: true,
         boardGameAccessory: false,
         numOfItemsToDisplay: 3,
-        exactSearch: false
+        exactSearch: true
     }, function(items) {
         callback(items);
     });
