@@ -15,6 +15,8 @@ from BoardGameGeek.com.
 Optionally, a shortcut can be configured by going to `chrome://extensions/shortcuts` in Chrome or to
 `about:addons` in Firefox.
 
+Tip: if you are not getting any results, try turning off the "Only display exact matches" option.
+
 ## Features
 
 * Lightweight
