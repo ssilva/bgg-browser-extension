@@ -10,9 +10,9 @@ from BoardGameGeek.com.
 ## How to use
 
 1. On any webpage, select the name of a board game.
-2. <kbd>Alt-Shift-S</kbd>
+2. Click on the meeple.
 
-To change the shortcut, go to `chrome://extensions/shortcuts` in Chrome or to
+Optionally, a shortcut can be configured by going to `chrome://extensions/shortcuts` in Chrome or to
 `about:addons` in Firefox.
 
 ## Features
@@ -23,8 +23,8 @@ To change the shortcut, go to `chrome://extensions/shortcuts` in Chrome or to
 
 ## Screenshots
 
-![Quick BGG Rating](https://raw.githubusercontent.com/ssilva/bgg-browser-extension/master/dist/screenshot-01.png "Quick BGG Rating")
-![Quick BGG Rating - Options](https://raw.githubusercontent.com/ssilva/bgg-browser-extension/master/dist/screenshot-02.png "Quick BGG Rating - Options")
+![Quick BGG Rating](https://raw.githubusercontent.com/ssilva/bgg-browser-extension/main/dist/screenshot-01.png "Quick BGG Rating")
+![Quick BGG Rating - Options](https://raw.githubusercontent.com/ssilva/bgg-browser-extension/main/dist/screenshot-02.png "Quick BGG Rating - Options")
 
 [1]: https://chrome.google.com/webstore/detail/quick-bgg-rating/nganmciekgocjldlblecnnfheffpennb
 [2]: https://addons.mozilla.org/addon/quick-bgg-rating/
