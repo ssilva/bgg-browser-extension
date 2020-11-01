@@ -1,6 +1,10 @@
 Changelog
 =========
 
+v1.5.2 (2020-10-31)
+-------------------
+* Fix a bug in the logic that picks the best matches among the items returned by the API.
+
 v1.5.1 (2020-10-21)
 -------------------
 * Enable exact search by default

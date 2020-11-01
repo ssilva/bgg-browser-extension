@@ -70,6 +70,10 @@ function searchForItem(name) {
     });
 }
 
+function compareNumbers(a, b) {
+    return a - b;
+}
+
 function pickBestMatch(items) {
     if (items.children.length < 2)
         return [items.children[0].id];
@@ -80,7 +84,7 @@ function pickBestMatch(items) {
     for (let child of items.children)
         ids.push(child.id);
 
-    ids.sort();
+    ids.sort(compareNumbers);
     return ids.slice(0, OPTIONS.numOfItemsToDisplay);
 }
 
