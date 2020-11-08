@@ -1,6 +1,10 @@
 Changelog
 =========
 
+v1.5.3 (2020-11-07)
+-------------------
+* Fix a bug whereby games containing special characters (e.g. ampersands) did not return any results. This affected Firefox only.
+
 v1.5.2 (2020-10-31)
 -------------------
 * Fix a bug in the logic that picks the best matches among the items returned by the API.

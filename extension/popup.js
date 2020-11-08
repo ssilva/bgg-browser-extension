@@ -190,7 +190,7 @@ function buildSearchUrl(name) {
     if (OPTIONS.exactSearch)
         params.push("exact=1");
 
-    params.push("query=" + name);
+    params.push("query=" + encodeURIComponent(name));
 
     return API_BASE_URL + "/search?" + params.join("&");
 }
