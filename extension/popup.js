@@ -11,21 +11,39 @@ loadOptions(function(opts) {
     console.log("OPTIONS=" + JSON.stringify(OPTIONS));
 });
 
-document.addEventListener("DOMContentLoaded", function() {
-    chrome.tabs.executeScript({ code: "window.getSelection().toString();" }, handleSelection);
-    document.getElementById("search").addEventListener("keyup", handleSearchKeyUp);
-    document.getElementById("search").focus();
-});
+document.addEventListener("DOMContentLoaded", handleContentLoaded);
 
-function handleSelection(selection) {
-    // This error will be thrown if the user activates the extension while not on a web page.
-    if (chrome.runtime.lastError) {
+async function handleContentLoaded() {
+    const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+
+    if (tab.url.startsWith("chrome://") || tab.url.startsWith("chrome-extension://")) {
         displayStatus("or go to a webpage");
         displaySearch();
         return;
     }
 
-    var selectedText = selection[0].trim();
+    const results = await chrome.scripting.executeScript({
+        target: { tabId: tab.id },
+        func: getSelectionString
+    });
+
+    handleSelection(results);
+
+    document.getElementById("search").addEventListener("keyup", handleSearchKeyUp);
+}
+
+function getSelectionString() {
+  return window.getSelection().toString();
+}
+
+function handleSelection(selection) {
+    if (!selection || selection.length === 0 || selection[0] === undefined) {
+        displayStatus("selection undefined");
+        displaySearch();
+        return;
+    }
+
+    var selectedText = selection[0].result.trim();
     if (selectedText.length > 1 && selectedText.length < 100) {
         displaySpinner();
         searchForItem(selectedText);
@@ -50,13 +68,11 @@ function handleSearchKeyUp(event) {
     }
 }
 
-function searchForItem(name) {
+async function searchForItem(name) {
     var url = buildSearchUrl(name);
-    httpGet(url, function() {
-        if (this.readyState !== XMLHttpRequest.DONE)
-            return;
-
-        var items = this.responseXML.getElementsByTagName("items")[0];
+    try {
+        const responseXML = await httpGet(url);
+        var items = responseXML.getElementsByTagName("items")[0];
         if (items.attributes.total.value > 0) {
             var ids = pickBestMatch(items);
             for (let id of ids)
@@ -67,7 +83,11 @@ function searchForItem(name) {
             displayStatus("\"" + name + "\" was not found.");
             displaySearch(name);
         }
-    });
+    } catch (error) {
+        console.error("Error during search:", error);
+        hideSpinner();
+        displayStatus("Error fetching data:");
+    }
 }
 
 function compareNumbers(a, b) {
@@ -88,17 +108,16 @@ function pickBestMatch(items) {
     return ids.slice(0, OPTIONS.numOfItemsToDisplay);
 }
 
-function retrieveItem(id) {
+async function retrieveItem(id) {
     var url = API_BASE_URL + "/thing?stats=1&id=" + id;
-    httpGet(url, function() {
-        if (this.readyState !== XMLHttpRequest.DONE)
-            return;
+    try {
+        const responseXML = await httpGet(url);
 
-        var name = this.responseXML.getElementsByTagName("name")[0].attributes.value.nodeValue;
-        var rating = this.responseXML.getElementsByTagName("average")[0].attributes.value.nodeValue;
-        var ranks = this.responseXML.getElementsByTagName("rank");
-        var yearPublished = this.responseXML.getElementsByTagName("yearpublished")[0].attributes.value.nodeValue;
-        var type = this.responseXML.getElementsByTagName("item")[0].attributes.type.nodeValue;
+        var name = responseXML.getElementsByTagName("name")[0].attributes.value.nodeValue;
+        var rating = responseXML.getElementsByTagName("average")[0].attributes.value.nodeValue;
+        var ranks = responseXML.getElementsByTagName("rank");
+        var yearPublished = responseXML.getElementsByTagName("yearpublished")[0].attributes.value.nodeValue;
+        var type = responseXML.getElementsByTagName("item")[0].attributes.type.nodeValue;
 
         var rank = "Not found";
         for (let r of ranks) {
@@ -113,7 +132,11 @@ function retrieveItem(id) {
         displayStatus("");
         hideSearch();
         displayItem(0, id, name, rating, yearPublished, type, rank);
-    });
+    } catch (error) {
+        console.error("Error during retrieval:", error);
+        hideSpinner();
+        displayStatus("Error fetching item details.");
+    }
 }
 
 function displayItem(index, id, name, rating, yearPublished, type, rank) {
@@ -198,20 +221,25 @@ function buildSearchUrl(name) {
 function displaySearch(query) {
     var searchInput = document.getElementById("search");
     searchInput.style.display = "block";
-    searchInput.focus = true;
 
     if (query)
         searchInput.value = query;
+
+    setTimeout(() => {
+        document.getElementById("search").focus();
+    }, 100);
 }
 
 function hideSearch() {
     document.getElementById("search").style.display = "none";
 }
 
-function httpGet(url, onReady) {
-    var xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = onReady;
+async function httpGet(url) {
     console.info("httpGet(): " + url);
-    xhr.open("GET", url, true);
-    xhr.send();
+    const response = await fetch(url, {headers: {"Authorization": "Bearer 9716e4a7-f402-4833-9877-ea877c79fbcS"}});
+    if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const text = await response.text();
+    return new DOMParser().parseFromString(text, "text/xml");
 }

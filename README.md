@@ -1,4 +1,4 @@
-# Quick BGG Rating
+# Quick Board Game Rating
 
 A Chrome and Firefox extension for quickly getting the rating of a board game
 from BoardGameGeek.com.
@@ -25,8 +25,8 @@ Tip: if you are not getting any results, try turning off the "Only display exact
 
 ## Screenshots
 
-![Quick BGG Rating](https://raw.githubusercontent.com/ssilva/bgg-browser-extension/main/dist/screenshot-01.png "Quick BGG Rating")
-![Quick BGG Rating - Options](https://raw.githubusercontent.com/ssilva/bgg-browser-extension/main/dist/screenshot-02.png "Quick BGG Rating - Options")
+![Quick Board Game Rating](https://raw.githubusercontent.com/ssilva/bgg-browser-extension/main/dist/screenshot-01.png "Quick Board Game Rating")
+![Quick Board Game Rating - Options](https://raw.githubusercontent.com/ssilva/bgg-browser-extension/main/dist/screenshot-02.png "Quick Board Game Rating - Options")
 
 [1]: https://chrome.google.com/webstore/detail/quick-bgg-rating/nganmciekgocjldlblecnnfheffpennb
 [2]: https://addons.mozilla.org/addon/quick-bgg-rating/

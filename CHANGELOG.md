@@ -1,6 +1,11 @@
 Changelog
 =========
 
+v1.6.0 (2025-11-03)
+-------------------
+* Update to manifest version 3.
+* Change name from "Quick BGG Rating" to "Quick Board Game Rating" to comply with BoardGameGeek.com terms. 
+
 v1.5.3 (2020-11-07)
 -------------------
 * Fix a bug whereby games containing special characters (e.g. ampersands) did not return any results. This affected Firefox only.
