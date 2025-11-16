@@ -2,7 +2,7 @@
     "manifest_version": 3,
 
     "name": "Quick Board Game Rating",
-    "version": "1.6.0",
+    "version": "1.6.1",
     "description": "Quickly get the rating of a board game from BoardGameGeek.com.",
     "homepage_url": "https://github.com/ssilva/bgg-browser-extension",
     "author": "Saulo Silva",
@@ -37,5 +37,14 @@
 
     "host_permissions": [
         "https://boardgamegeek.com/"
-    ]
+    ],
+
+    "browser_specific_settings": {
+        "gecko": {
+            "id": "saulo@saulosilva.com",
+            "data_collection_permissions": {
+                "required": ["none"]
+            }
+        }
+    }
 }

@@ -1,6 +1,10 @@
 Changelog
 =========
 
+v1.6.1 (2025-11-12)
+-------------------
+* Add Firefox-required properties to manifest.
+
 v1.6.0 (2025-11-03)
 -------------------
 * Update to manifest version 3.
