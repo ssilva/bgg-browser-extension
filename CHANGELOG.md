@@ -1,6 +1,10 @@
 Changelog
 =========
 
+v1.6.2 (2025-11-16)
+-------------------
+* Add BGG logo to pop-up.
+
 v1.6.1 (2025-11-12)
 -------------------
 * Add Firefox-required properties to manifest.
