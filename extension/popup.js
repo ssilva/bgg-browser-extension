@@ -56,7 +56,7 @@ function handleSelection(selection) {
 function handleSearchKeyUp(event) {
     event.preventDefault();
 
-    if (event.code === "Enter") {
+    if (event.key === "Enter") {
         var query = document.getElementById("search").value;
         query = query.trim();
         if (query.length > 1) {
@@ -86,7 +86,7 @@ async function searchForItem(name) {
     } catch (error) {
         console.error("Error during search:", error);
         hideSpinner();
-        displayStatus("Error fetching data:");
+        displayStatus("Error during search: " + error);
     }
 }
 

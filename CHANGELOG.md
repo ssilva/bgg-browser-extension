@@ -1,6 +1,10 @@
 Changelog
 =========
 
+v1.6.3 (2025-12-01)
+-------------------
+* Fix issue with `Enter` no longer working on the search field.
+
 v1.6.2 (2025-11-16)
 -------------------
 * Add BGG logo to pop-up.
